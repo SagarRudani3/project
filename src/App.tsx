@@ -21,8 +21,8 @@ import NodeEditor from './components/NodeEditor';
 import LoginModal from './components/LoginModal';
 import RegisterModal from './components/RegisterModal';
 
-const API_URL = 'http://localhost:3100/api/emails';
-const AUTH_API_URL = 'http://localhost:3100/api/auth';
+const API_URL = 'https://backend-3yd6.onrender.comapi/emails';
+const AUTH_API_URL = 'https://backend-3yd6.onrender.com/api/auth';
 
 const nodeTypes = {
   email: EmailNode,
