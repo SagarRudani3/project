@@ -73,12 +73,12 @@ export default function NodeEditor({ node, onUpdate, onClose }: NodeEditorProps)
     <>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Source Name
+          Source Email
         </label>
         <input
-          type="text"
-          value={node.data.source}
-          onChange={(e) => handleChange('source', e.target.value)}
+          type="email"
+          value={node.data.email}
+          onChange={(e) => handleChange('email', e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>

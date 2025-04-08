@@ -1,4 +1,17 @@
 import { PlusCircle, Clock, Users, Mail } from 'lucide-react';
+import React from 'react';
+
+interface SavedFlow {
+  id: string;
+  name: string;
+  createdAt: string;
+}
+
+interface SidebarProps {
+  savedFlows?: SavedFlow[];
+  onLoadFlow: (flow: SavedFlow) => void;
+  onClearFlow: () => void;
+}
 
 const nodeTypes = [
   {
@@ -18,10 +31,15 @@ const nodeTypes = [
   },
 ];
 
-export default function Sidebar() {
+const Sidebar: React.FC<SidebarProps> = ({ savedFlows = [], onLoadFlow, onClearFlow }) => {
   const onDragStart = (event: React.DragEvent, nodeType: string) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
     event.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleFlowClick = (flow: SavedFlow) => {
+    onLoadFlow(flow);
+    onClearFlow();
   };
 
   return (
@@ -43,6 +61,28 @@ export default function Sidebar() {
           </div>
         ))}
       </div>
+
+      {savedFlows.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold mb-4">Saved Flows</h2>
+          <div className="space-y-2">
+            {savedFlows.map((flow) => (
+              <div
+                key={flow.id}
+                className="bg-gray-100 p-2 rounded cursor-pointer hover:bg-gray-200"
+                onClick={() => handleFlowClick(flow)}
+              >
+                <div className="font-medium">{flow.name}</div>
+                <div className="text-sm text-gray-500">
+                  {new Date(flow.createdAt).toLocaleDateString()}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default Sidebar;
